@@ -1,0 +1,41 @@
+{
+  "figma_file_key": "wgOe4x0idD1rlOP6TEBGK3",
+  "frame": {
+    "name": "Dashboard Login",
+    "node_id": "1:2",
+    "size": { "width": 1280, "height": 720 }
+  },
+  "colors": {
+    "brand": "#2148C0",
+    "blob_1": "#264ECA",
+    "blob_2": "#244BC5",
+    "blob_3": "#274FC7",
+    "white": "#FFFFFF",
+    "text_on_brand": "#FFFFFF"
+  },
+  "typography": {
+    "font_family": "Montserrat",
+    "input_placeholder": { "size": 14, "weight": 300, "case": "upper" },
+    "button": { "size": 16, "weight": 600, "case": "upper" },
+    "link": { "size": 16, "weight": 500 }
+  },
+  "radii": { "sm": 4 },
+  "shadows": {
+    "button": "0px 4px 4px rgba(0,0,0,0.30)"
+  },
+  "layout": {
+    "form_width": 300,
+    "control_height": 45
+  },
+  "assets": {
+    "icons": {
+      "cart": "./assets/icons/cart.svg",
+      "user": "./assets/icons/user.svg",
+      "lock": "./assets/icons/lock.svg"
+    },
+    "images": {
+      "blob": "./assets/images/blob.svg"
+    }
+  }
+}
+

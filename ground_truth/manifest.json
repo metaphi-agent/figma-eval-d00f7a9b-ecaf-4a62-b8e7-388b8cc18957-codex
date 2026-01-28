@@ -1,0 +1,12 @@
+{
+  "figma_file_key": "wgOe4x0idD1rlOP6TEBGK3",
+  "total_frames": 1,
+  "frames": [
+    {
+      "name": "Dashboard Login",
+      "node_id": "1:2",
+      "gt_image": "1-2.png",
+      "target_route": "/login"
+    }
+  ]
+}

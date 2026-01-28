@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Design tokens will be extracted from Figma */
+@theme {
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-brand: #2148C0;
+  --color-blob-1: #264ECA;
+  --color-blob-2: #244BC5;
+  --color-blob-3: #274FC7;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
