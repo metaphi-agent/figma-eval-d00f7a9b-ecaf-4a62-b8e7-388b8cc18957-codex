@@ -1,133 +1,101 @@
-import { useMemo, useState } from 'react'
-import Button from '../components/ui/Button'
-import TextField from '../components/ui/TextField'
+import { type FormEvent, useMemo, useState } from 'react'
 
-type LoginValues = {
+import Button from '../components/ui/Button'
+import TextInput from '../components/ui/TextInput'
+
+type FormState = {
   username: string
   password: string
 }
 
-function validate(values: LoginValues) {
-  const errors: Partial<Record<keyof LoginValues, string>> = {}
-
+function validate(values: FormState) {
+  const errors: Partial<Record<keyof FormState, string>> = {}
   if (!values.username.trim()) errors.username = 'Username is required.'
   if (!values.password) errors.password = 'Password is required.'
-
   return errors
 }
 
 export default function LoginPage() {
-  const [values, setValues] = useState<LoginValues>({ username: '', password: '' })
-  const [touched, setTouched] = useState<Partial<Record<keyof LoginValues, boolean>>>({})
+  const [values, setValues] = useState<FormState>({ username: '', password: '' })
+  const [touched, setTouched] = useState<Partial<Record<keyof FormState, boolean>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitMessage, setSubmitMessage] = useState<string | null>(null)
 
   const errors = useMemo(() => validate(values), [values])
-  const showError = (field: keyof LoginValues) => Boolean(touched[field] && errors[field])
+  const canSubmit = Object.keys(errors).length === 0 && !isSubmitting
 
-  const onSubmit = async (e: React.FormEvent) => {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setTouched({ username: true, password: true })
-    setSubmitMessage(null)
 
-    const nextErrors = validate(values)
-    if (Object.keys(nextErrors).length > 0) return
+    if (Object.keys(errors).length > 0) return
 
+    setIsSubmitting(true)
     try {
-      setIsSubmitting(true)
-      await new Promise((r) => setTimeout(r, 650))
-      const isDemoSuccess = values.username.trim().toLowerCase() === 'admin' && values.password === 'admin'
-      setSubmitMessage(isDemoSuccess ? 'Signed in (demo).' : 'Invalid username or password.')
+      await new Promise((r) => setTimeout(r, 700))
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-[color:var(--color-brand)]">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute left-[-362px] top-[358px] h-[724px] w-[724px] rounded-full bg-[color:var(--color-blob-3)]"
-        />
-        <div
-          className="absolute left-[-286px] top-[434px] h-[572px] w-[572px] rounded-full bg-[color:var(--color-blob-2)]"
-        />
-        <div
-          className="absolute left-[-219px] top-[501px] h-[438px] w-[438px] rounded-full bg-[color:var(--color-blob-1)]"
-        />
+    <main className="relative min-h-screen overflow-hidden bg-[color:var(--color-primary)]">
+      <img
+        src="./assets/illustrations/login-bg.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-left-bottom"
+      />
 
-        <img
-          className="absolute left-[416px] top-[-1px] h-auto w-[864px]"
-          src="./assets/images/blob.svg"
-          alt=""
-          draggable={false}
-        />
-      </div>
+      <div className="relative flex min-h-screen items-center justify-center px-6 py-10">
+        <div className="w-[300px] max-w-[calc(100vw-48px)]">
+          <form onSubmit={onSubmit} className="w-full">
+            <div className="flex flex-col items-center">
+              <img
+                src="./assets/icons/cart.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-auto w-[124px] select-none"
+              />
 
-      <main className="relative mx-auto flex min-h-dvh max-w-[1280px] items-center justify-center px-6">
-        <div className="w-full max-w-[300px]">
-          <div className="flex flex-col items-center">
-            <img
-              src="./assets/icons/cart.svg"
-              alt=""
-              className="h-[98px] w-[119px]"
-              draggable={false}
-            />
-
-            <form onSubmit={onSubmit} className="mt-[72px] w-full">
-              <div className="space-y-5">
-                <TextField
-                  id="username"
-                  name="username"
+              <div className="mt-[72px] w-full space-y-5">
+                <TextInput
+                  iconSrc="./assets/icons/user.svg"
+                  label="Username"
                   value={values.username}
+                  autoComplete="username"
                   onChange={(e) => setValues((v) => ({ ...v, username: e.target.value }))}
                   onBlur={() => setTouched((t) => ({ ...t, username: true }))}
-                  placeholder="USERNAME"
-                  iconSrc="./assets/icons/user.svg"
-                  autoComplete="username"
-                  required
-                  aria-invalid={showError('username') ? 'true' : 'false'}
-                  error={showError('username') ? errors.username : undefined}
+                  error={touched.username ? errors.username : undefined}
                 />
-
-                <TextField
-                  id="password"
-                  name="password"
+                <TextInput
+                  iconSrc="./assets/icons/lock.svg"
+                  label="Password"
                   type="password"
                   value={values.password}
+                  autoComplete="current-password"
                   onChange={(e) => setValues((v) => ({ ...v, password: e.target.value }))}
                   onBlur={() => setTouched((t) => ({ ...t, password: true }))}
-                  placeholder="PASSWORD"
-                  iconSrc="./assets/icons/lock.svg"
-                  autoComplete="current-password"
-                  required
-                  aria-invalid={showError('password') ? 'true' : 'false'}
-                  error={showError('password') ? errors.password : undefined}
+                  error={touched.password ? errors.password : undefined}
                 />
               </div>
 
-              <div className="mt-[43px]">
-                <Button type="submit" className="w-full" isLoading={isSubmitting}>
+              <div className="mt-[43px] w-full">
+                <Button type="submit" isLoading={isSubmitting} disabled={!canSubmit}>
                   Login
                 </Button>
-                <div className="mt-3 flex justify-end">
+                <div className="mt-[11px] flex justify-end">
                   <a
                     href="#"
-                    className="text-[16px] font-medium text-white/90 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-4"
+                    className="text-[16px] font-medium text-white transition-colors duration-150 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-primary)]"
                   >
                     Forgot password?
                   </a>
                 </div>
-                {submitMessage ? (
-                  <p className="mt-3 text-sm text-white/90" role="status">
-                    {submitMessage}
-                  </p>
-                ) : null}
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   )
 }

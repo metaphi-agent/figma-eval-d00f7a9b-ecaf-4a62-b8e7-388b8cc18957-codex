@@ -1,23 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap');
 @import "tailwindcss";
 
-/* Design tokens will be extracted from Figma */
+/* Design tokens extracted from Figma */
 @theme {
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --color-brand: #2148C0;
-  --color-blob-1: #264ECA;
-  --color-blob-2: #244BC5;
-  --color-blob-3: #274FC7;
-}
+  --color-primary: #2148c0;
+  --color-bg-blob: #264eca;
+  --color-white: #ffffff;
 
-html,
-body,
-#root {
-  height: 100%;
+  --radius-control: 4px;
+  --shadow-button: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 body {
   font-family: var(--font-sans);
-  margin: 0;
   -webkit-font-smoothing: antialiased;
 }
