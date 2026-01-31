@@ -1,0 +1,15 @@
+{
+  "github_repo_url": "https://github.com/metaphi-agent/figma-eval-d00f7a9b-ecaf-4a62-b8e7-388b8cc18957-codex",
+  "figma_file_key": "wgOe4x0idD1rlOP6TEBGK3",
+  "frame_node_id": "1:2",
+  "frame_name": "Dashboard Login",
+  "completed_steps": [
+    "Step 1: Extract from Figma",
+    "Step 2: Export Ground Truth",
+    "Step 3: Visual Analysis",
+    "Step 4: Component & Interaction Audit",
+    "Step 5: Scaffold Project",
+    "Step 6: Generate Components"
+  ],
+  "updated_at": "2026-01-31T00:00:00Z"
+}

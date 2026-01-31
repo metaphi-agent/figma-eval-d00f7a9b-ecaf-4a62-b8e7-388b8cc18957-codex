@@ -1,0 +1,38 @@
+{
+  "figma": {
+    "file_key": "wgOe4x0idD1rlOP6TEBGK3",
+    "frame_node_id": "1:2",
+    "frame_name": "Dashboard Login"
+  },
+  "colors": {
+    "bg_base": "#2148C0",
+    "bg_blob": "#264ECA",
+    "bg_ellipse1": "#244BC5",
+    "bg_ellipse2": "#274FC7",
+    "text_on_blue": "#FFFFFF"
+  },
+  "typography": {
+    "font_family": "Montserrat",
+    "weights": {
+      "light": 300,
+      "medium": 500,
+      "semibold": 600
+    }
+  },
+  "radii": {
+    "sm": 4
+  },
+  "sizes": {
+    "form_width": 300,
+    "field_height": 45
+  },
+  "effects": {
+    "button_shadow": {
+      "type": "drop_shadow",
+      "x": 0,
+      "y": 4,
+      "blur": 4,
+      "color_rgba": "rgba(0,0,0,0.3)"
+    }
+  }
+}

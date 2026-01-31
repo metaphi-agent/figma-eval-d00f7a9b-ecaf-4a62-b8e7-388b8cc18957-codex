@@ -6,7 +6,7 @@
       "name": "Dashboard Login",
       "node_id": "1:2",
       "gt_image": "1-2.png",
-      "target_route": "/login"
+      "target_route": "/"
     }
   ]
 }
